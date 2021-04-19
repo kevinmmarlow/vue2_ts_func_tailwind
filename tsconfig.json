@@ -30,6 +30,8 @@
     ]
   },
   "include": [
+    "backend/**/*.ts",
+    "backend/**/*.tsx",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",

@@ -3,13 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve:app": "vue-cli-service serve",
+    "serve:lambda": "netlify-lambda serve backend",
+    "serve:lambda-sourcemaps": "netlify-lambda serve backend --config serverless-config.js",
+    "serve": "run-p serve:app serve:lambda",
+    "build:app": "vue-cli-service build",
+    "build:lambda": "netlify-lambda build backend",
+    "build:lambda-sourcemaps": "netlify-lambda build backend --config serverless-config.js",
+    "build": "run-p build:**",
+    "ts-check:app": "tsc --noEmit --lib ES2015 ./src/*.ts",
+    "ts-check:lambda": "tsc --noEmit --lib ES2015 ./backend/*.ts",
+    "ts-check": "run-p ts-check:app ts-check:lambda",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint:fix": "vue-cli-service  lint --fix",
+    "lint:staged": "lint-staged"
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "netlify-lambda": "^2.0.3",
+    "tailwindcss": "^2.1.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
@@ -18,6 +31,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
+    "@types/cors": "^2.8.10",
     "@types/mocha": "^5.2.4",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
@@ -32,11 +46,30 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^1.0.3",
     "chai": "^4.1.2",
+    "cors": "^2.8.5",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "helmet": "^4.5.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
+    "serverless-http": "^2.7.0",
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "yarn lint:fix",
+      "git add --force"
+    ]
   }
 }
