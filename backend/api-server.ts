@@ -2,6 +2,7 @@ import { Express } from 'express-serve-static-core'
 import express from 'express'
 import serverless from 'serverless-http'
 import loaders from './loaders'
+import ServerlessHttp from 'serverless-http'
 
 /**
  * The main function for starting our server.
@@ -21,6 +22,5 @@ const createApp = function startServer(): Express {
 }
 
 // Bridge to Netlify Lambda
-const app = createApp
-module.exports = app
-module.exports.handler = serverless(app)
+const app = createApp()
+export const handler: ServerlessHttp.Handler = serverless(app)

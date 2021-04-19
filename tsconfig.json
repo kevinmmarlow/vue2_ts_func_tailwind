@@ -1,16 +1,20 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "sourceMap": true,
+    "noEmit": true,
     "baseUrl": ".",
     "types": [
       "webpack-env",
@@ -30,15 +34,8 @@
     ]
   },
   "include": [
-    "backend/**/*.ts",
-    "backend/**/*.tsx",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src",
+    "tests",
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["**/node_modules", "**/.*/", "backend"]
 }

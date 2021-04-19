@@ -14,7 +14,7 @@ export default (app: Express, baseUrl: string): void => {
   app.use(express.json())
 
   // Server Setup - path must route to lambda
-  app.use(baseUrl, router)
+  app.use(baseUrl, router())
 
   // error handling
   app.use(errorHandler)

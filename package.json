@@ -11,13 +11,11 @@
     "build:lambda": "netlify-lambda build backend",
     "build:lambda-sourcemaps": "netlify-lambda build backend --config serverless-config.js",
     "build": "run-p build:**",
-    "ts-check:app": "tsc --noEmit --lib ES2015 ./src/*.ts",
-    "ts-check:lambda": "tsc --noEmit --lib ES2015 ./backend/*.ts",
-    "ts-check": "run-p ts-check:app ts-check:lambda",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service  lint --fix",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -30,9 +28,12 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/aws-lambda": "^8.10.75",
     "@types/chai": "^4.2.11",
     "@types/cors": "^2.8.10",
     "@types/mocha": "^5.2.4",
+    "@types/node": "^14.14.41",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -58,7 +59,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "serverless-http": "^2.7.0",
-    "typescript": "~4.1.5",
+    "typescript": "^4.2.4",
     "vue-template-compiler": "^2.6.11"
   },
   "husky": {
